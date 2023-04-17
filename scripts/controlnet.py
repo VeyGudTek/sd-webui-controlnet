@@ -182,16 +182,16 @@ class Script(scripts.Script):
 
         with gr.Row():
             gr.HTML(value='<p>Invert colors if your image has white background.<br >Change your brush width to make it thinner if you want to draw something.<br ></p>')
-            webcam_enable = ToolButton(value=camera_symbol)
-            webcam_mirror = ToolButton(value=reverse_symbol)
+            webcam_enable = ToolButton(visible = False, value=camera_symbol)
+            webcam_mirror = ToolButton(visible = False, value=reverse_symbol)
             send_dimen_button = ToolButton(value=tossup_symbol)
 
         with gr.Row():
             enabled = gr.Checkbox(label='Enable', value=default_unit.enabled)
-            scribble_mode = gr.Checkbox(label='Invert Input Color', value=default_unit.invert_image)
-            rgbbgr_mode = gr.Checkbox(label='RGB to BGR', value=default_unit.rgbbgr_mode)
-            lowvram = gr.Checkbox(label='Low VRAM', value=default_unit.low_vram)
-            guess_mode = gr.Checkbox(label='Guess Mode', value=default_unit.guess_mode)
+            scribble_mode = gr.Checkbox(visible = False, label='Invert Input Color', value=default_unit.invert_image)
+            rgbbgr_mode = gr.Checkbox(visible = False, label='RGB to BGR', value=default_unit.rgbbgr_mode)
+            lowvram = gr.Checkbox(visible = False, label='Low VRAM', value=default_unit.low_vram)
+            guess_mode = gr.Checkbox(visible = False, label='Guess Mode', value=default_unit.guess_mode)
 
         ctrls += (enabled,)
         # infotext_fields.append((enabled, "ControlNet Enabled"))
@@ -365,7 +365,7 @@ class Script(scripts.Script):
             return None
 
         resize_mode = gr.Radio(choices=[e.value for e in external_code.ResizeMode], value=default_unit.resize_mode.value, label="Resize Mode")
-        with gr.Row():
+        with gr.Row(visible = False):
             with gr.Column():
                 canvas_width = gr.Slider(label="Canvas Width", minimum=256, maximum=1024, value=512, step=64)
                 canvas_height = gr.Slider(label="Canvas Height", minimum=256, maximum=1024, value=512, step=64)
@@ -398,7 +398,7 @@ class Script(scripts.Script):
             if is_image:
                 return gr.update(value=result, visible=True, interactive=False)
         
-        with gr.Row():
+        with gr.Row(visible = False):
             annotator_button = gr.Button(value="Preview annotator result")
             annotator_button_hide = gr.Button(value="Hide annotator result")
         
@@ -453,7 +453,7 @@ class Script(scripts.Script):
         max_models = shared.opts.data.get("control_net_max_models_num", 1)
         elem_id_tabname = ("img2img" if is_img2img else "txt2img") + "_controlnet"
         with gr.Group(elem_id=elem_id_tabname):
-            with gr.Accordion("ControlNet", open = False, elem_id="controlnet"):
+            with gr.Accordion("Render Your Sketch!", open = False, elem_id="controlnet"):
                 if max_models > 1:
                     with gr.Tabs(elem_id=f"{elem_id_tabname}_tabs"):
                         for i in range(max_models):
