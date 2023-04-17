@@ -374,7 +374,7 @@ class Script(scripts.Script):
                 canvas_swap_res = ToolButton(value=switch_values_symbol)
                 canvas_swap_res.click(lambda w, h: (h, w), inputs=[canvas_width, canvas_height], outputs=[canvas_width, canvas_height])
                     
-        create_button = gr.Button(value="Create blank canvas")
+        create_button = gr.Button(visible = False, value="Create blank canvas")
         create_button.click(fn=create_canvas, inputs=[canvas_height, canvas_width], outputs=[input_image])
         
         def run_annotator(image, module, pres, pthr_a, pthr_b):
