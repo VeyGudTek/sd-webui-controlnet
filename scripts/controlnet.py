@@ -181,7 +181,7 @@ class Script(scripts.Script):
             generated_image = gr.Image(label="Annotator result", visible=False, elem_id=f'{elem_id_tabname}_{tabname}_generated_image')
 
         with gr.Row():
-            gr.HTML(value='<p>Invert colors if your image has white background.<br >Change your brush width to make it thinner if you want to draw something.<br ></p>')
+            gr.HTML(value='<p>1. Upload your sketch<br >2. Check Enable<br >3. Select "Canny" for both preprocessor and model<br >4. Press Generate<br ></p>')
             webcam_enable = ToolButton(visible = False, value=camera_symbol)
             webcam_mirror = ToolButton(visible = False, value=reverse_symbol)
             send_dimen_button = ToolButton(value=tossup_symbol)
